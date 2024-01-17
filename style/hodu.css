@@ -411,12 +411,62 @@ footer {
 
   .header-banner {
     flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-banner-texts {
+    /* margin-top: 200px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .header-banner-main-text {
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    margin-top: 40px;
+  }
+
+  .header-banner-sub-text {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 40px;
+    line-height: 20px;
+  }
+
+  #header-banner-download-button {
+    margin-top: 40px;
   }
 
   .main-img-single {
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
-  .main-single-img {
+  .main-img-single img {
     width: 80vw;
+  }
+
+  .main-img-single-main-text {
+    font-size: 24px;
+    line-height: 30px;
+    margin-top: 40px;
+  }
+
+  .main-img-single-sub-text {
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 20px;
+  }
+
+  .main-img-grid-texts-bold {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .main-img-grid-texts-plain {
   }
 }
