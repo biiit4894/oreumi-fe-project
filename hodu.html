@@ -79,7 +79,7 @@
       </div>
       <div class="main-img-grid-text-below">
         <p class="main-img-grid-text-below-bold">Continue exploring HODU</p>
-        <button class="main-img-grid-more-button">Show more</button>
+        <button type="button" class="main-img-grid-more-button">Show more</button>
       </div>
       <hr class="main-img-grid-hr">
     </div>
@@ -100,13 +100,13 @@
           Lorem Ipsum has been the industry's standard dummy text </p>
       </div>
 
-      <form method="post" action="">
+      <form>
         <div class="main-subscribe-email-input-wrap">
           <!-- <img class="mail-icon" alt="이메일 아이콘" src="./img/mail.png"> -->
           <input class="main-subscribe-email-input" type="email" name="email" id="email"
             placeholder="Enter your e-mail address">
 
-          <button class="main-subscribe-email-input-button">Subscribe</button>
+          <button type="button" class="main-subscribe-email-input-button">Subscribe</button>
         </div>
 
 
@@ -155,9 +155,10 @@
   <script>
     const moreBtn = document.querySelector('.main-img-grid-more-button')
     moreBtn.addEventListener('click', (event) => {
-      fetchImages();
-    })
-    const imageList = document.querySelector(".image-list");
+      fetchImages()
+    });
+
+    const imageList = document.querySelector(".main-img-grid-container");
     let pageToFetch = 1;
 
     async function fetchImages(pageNum) {
@@ -168,8 +169,6 @@
         }
         const datas = await response.json();
         console.log(datas);
-
-        ifScrollDown();
         makeImageList(datas);
 
       } catch (error) {
@@ -178,7 +177,7 @@
     }
     function makeImageList(datas) {
       datas.forEach((item) => {
-        imageList.innerHTML += "<li><img src=" + item.download_url + " alt=''></li>";
+        imageList.innerHTML += "<img class='main-img-grid-item' src=" + item.download_url + " alt=''>";
         // 그냥 할당연산자만 쓰면 li는 계속 1개만 보인다 (HTML에 할당되는 값이 계속 변경)
       })
     }
@@ -195,6 +194,25 @@
         };
       });
     }
+
+    // 스로틀링
+    const throttling = (callback, delay) => {
+      let timer = null;
+      return () => {
+        console.log(timer);
+
+        if (timer === null) {
+          timer = setTimeout(() => {
+            callback();
+            timer = null;
+          }, delay);
+        }
+      };
+    };
+
+    window.addEventListener('scroll', throttling(ifScrollDown, 3000));
+
+
   </script>
 
   <!-- 카카오맵 -->
@@ -212,12 +230,17 @@
 
   <!-- 모달 팝업 -->
   <script>
+    const input = document.querySelector('.main-subscribe-email-input');
     const subscribBtn = document.querySelector('.main-subscribe-email-input-button');
     const closeBtn = document.querySelector('.main-subscribe-modal-button');
     const modal = document.querySelector('.main-subscribe-modal')
 
-    subscribBtn.addEventListener('click', () => {
-      modal.style.display = "flex";
+    subscribBtn.addEventListener('click', (event) => {
+      // event.preventDefault();
+      console.log("value: " + input.value)
+      if (input.value.includes("@")) {
+        modal.style.display = "flex";
+      }
     })
 
     closeBtn.addEventListener('click', () => {

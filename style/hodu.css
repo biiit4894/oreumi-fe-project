@@ -330,6 +330,10 @@ main {
   font-weight: 700;
 }
 
+.main-subscribe-modal-text-plain {
+  margin-top: 12px;
+}
+
 .main-subscribe-modal-button {
   font-family: "Pretendard-Regular";
   color: white;
@@ -339,6 +343,7 @@ main {
   font-weight: 700;
   /* width: 140px; */
   padding: 15px 31px;
+  margin-top: 38px;
 }
 
 footer {
