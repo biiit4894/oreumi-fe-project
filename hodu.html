@@ -27,8 +27,7 @@
       </nav>
       <div class="header-banner">
         <div class="header-banner-texts">
-          <p class="header-banner-main-text">Lorem Ipsum is simply<br>
-            dummy text of the printing and
+          <p class="header-banner-main-text">반가워요!<br> 호두의 공간에 오신걸 환영합니다
           </p>
           <p class="header-banner-sub-text">
             Lorem Ipsum is simply dummy text of the printing and<br>
@@ -95,16 +94,25 @@
 
     <div class="main-subscribe-wrap">
       <div class="main-subscribe-texts">
-        <p class="main-subscribe-text-bold">Subsribe to our Blog post</p>
+        <p class="main-subscribe-text-bold">Subscribe to our Blog post</p>
         <p class="main-subscribe-text-plain">Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.<br>
           Lorem Ipsum has been the industry's standard dummy text </p>
       </div>
 
-      <Label>
-        <input class="main-subsribe-email-input" type="email" placeholder="Enter your e-mail address">
-        <button class="main-subsribe-email-input-button">Subscribe</button>
-      </Label>
+      <form method="post" action="">
+        <div class="main-subscribe-email-input-wrap">
+          <!-- <img class="mail-icon" alt="이메일 아이콘" src="./img/mail.png"> -->
+          <input class="main-subscribe-email-input" type="email" name="email" id="email"
+            placeholder="Enter your e-mail address">
+
+          <button class="main-subscribe-email-input-button">Subscribe</button>
+        </div>
+
+
+      </form>
+
+
 
     </div>
 
@@ -204,7 +212,7 @@
 
   <!-- 모달 팝업 -->
   <script>
-    const subscribBtn = document.querySelector('.main-subsribe-email-input-button');
+    const subscribBtn = document.querySelector('.main-subscribe-email-input-button');
     const closeBtn = document.querySelector('.main-subscribe-modal-button');
     const modal = document.querySelector('.main-subscribe-modal')
 
