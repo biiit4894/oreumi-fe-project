@@ -102,7 +102,8 @@ main {
 
 .header-banner img {
   margin-top: 100px;
-  height: 80vh;
+  max-width: 23vw;
+  height: auto;
 }
 
 .main-img-single {
@@ -407,6 +408,12 @@ footer {
     margin-left: 10vw;
     margin-right: 10vw;
   }
+
+  .header-banner img {
+    margin-top: 100px;
+    max-width: 25vw;
+    height: auto;
+  }
 }
 
 @media (max-width: 800px) {
@@ -553,8 +560,10 @@ footer {
     flex-direction: column;
     flex-wrap: nowrap;
   }
-  .main-img-single img {
-    width: 80vw;
+  .header-banner img {
+    margin-top: 100px;
+    max-width: 70vw;
+    height: auto;
   }
 
   .main-img-single-main-text {
