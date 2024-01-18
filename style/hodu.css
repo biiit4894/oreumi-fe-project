@@ -454,6 +454,11 @@ footer {
   .main-img-single img {
     max-width: 24vw;
   }
+
+  .main-img-grid-container img {
+    border-radius: 20px;
+    width: 40%;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -652,5 +657,9 @@ footer {
   }
 
   .main-img-grid-texts-plain {
+  }
+  .main-img-grid-container img {
+    border-radius: 20px;
+    width: 90%;
   }
 }
