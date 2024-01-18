@@ -28,27 +28,26 @@ header {
 .header-nav {
   display: flex;
   height: 102px;
+  justify-content: space-between;
   align-items: center;
   margin-left: 20vw;
   margin-right: 20vw;
 }
 
 .header-nav-logo {
-  margin-right: auto;
 }
 .header-nav-menu {
-  margin-left: auto;
 }
 
 .header-nav-home,
 .header-nav-about {
-  margin-right: 30px;
+  margin-right: 1vw;
   text-decoration: none;
   color: black;
 }
 
 .header-nav-support {
-  margin-right: 49px;
+  margin-right: 2vw;
   text-decoration: none;
   color: black;
 }
@@ -62,6 +61,11 @@ header {
   font-weight: 700;
   width: 140px;
   padding: 15px 31px;
+}
+
+.header-nav-hamburger-icon,
+#header-nav-hamburger-menu {
+  display: none;
 }
 
 .header-banner {
@@ -392,6 +396,32 @@ footer {
   margin-right: 20px;
 }
 
+@media (max-width: 1000px) {
+  main,
+  .footer-logo-icons-wrap {
+    width: 80vw;
+  }
+
+  .header-nav,
+  .header-banner {
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+}
+
+@media (max-width: 800px) {
+  main,
+  .footer-logo-icons-wrap {
+    width: 90vw;
+  }
+
+  .header-nav,
+  .header-banner {
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}
+
 /* 모바일 세로 (해상도 ~ 479px)*/
 @media (max-width: 550px) {
   html {
@@ -407,6 +437,83 @@ footer {
   .header-banner {
     margin-left: 5vw;
     margin-right: 5vw;
+  }
+
+  .header-nav {
+    display: flex;
+    height: 76px;
+    align-items: center;
+    /* margin-left: 20vw;
+    margin-right: 20vw; */
+  }
+
+  .header-nav-logo img {
+    width: 92px;
+    height: 28px;
+  }
+
+  .header-nav-menu {
+    display: none;
+  }
+
+  .header-nav-hamburger-icon {
+    display: block;
+    cursor: pointer;
+  }
+
+  /* 햄버거 버튼 클릭 시 css */
+  .header-nav-hamburger-menu {
+    display: none;
+    position: relative;
+    z-index: 11;
+  }
+
+  #menu {
+    position: fixed;
+    /* width: 300px; */
+    width: 50vw;
+    height: 100vh;
+    top: -10vh;
+    right: 0;
+    padding: 50px;
+    padding-top: 125px;
+    background: #263140;
+  }
+
+  #menu .header-nav-hamburger-close-icon {
+    margin-top: -5vw;
+    margin-left: -5vw;
+    cursor: pointer;
+  }
+
+  #menu li {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+  }
+
+  #menu .menu-home {
+    margin-top: 120px;
+  }
+
+  #menu .menu-about,
+  #menu .menu-support {
+    margin-top: 30px;
+  }
+
+  #menu .menu-download-button {
+    margin-top: 50px;
+    font-family: "Pretendard-Regular";
+    color: white;
+    background-color: #d97652;
+    border: none;
+    border-radius: 40px;
+    font-weight: 700;
+    line-height: 18px;
+    padding: 15px 31px;
+    margin-top: 38px;
   }
 
   .header-banner {

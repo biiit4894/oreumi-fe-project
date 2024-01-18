@@ -23,6 +23,26 @@
             <a href="" class="header-nav-support">Support</a>
             <button href="" class="header-nav-download-button">Download</button>
           </div>
+          <!-- 모바일 view start-->
+          <img class="header-nav-hamburger-icon" src="./img/menu.svg" alt="햄버거 메뉴 열기 아이콘">
+          <div class="header-nav-hamburger-menu" id="header-nav-hamburger-menu">
+            <ul id="menu">
+              <img class="header-nav-hamburger-close-icon" src="./img/arrow-right.svg" alt="햄버거 메뉴 닫기 아이콘">
+              <a href="#">
+                <li class="menu-home">Home</li>
+              </a>
+              <a href="#">
+                <li class="menu-about">About</li>
+              </a>
+              <a href="#">
+                <li class="menu-support">Support</li>
+              </a>
+              <button class="menu-download-button">Download</button>
+            </ul>
+          </div>
+          <!-- 모바일 view end-->
+
+
         </div>
       </nav>
       <div class="header-banner">
@@ -149,11 +169,28 @@
     </div>
   </footer>
 
+  <!-- 햄버거 버튼 -->
+  <script>
+    const hamBtn = document.querySelector('.header-nav-hamburger-icon');
+    const hamMenu = document.querySelector('#header-nav-hamburger-menu')
+    const menu = document.querySelector('#menu');
+    hamBtn.addEventListener('click', function () {
+      hamMenu.style.display = "block";
+    });
+
+    const headerNavMenu = document.querySelector('.header-nav-menu'); // 햄버거 버튼 출력 전 pc 규격 nav바
+    const hamCloseBtn = document.querySelector('.header-nav-hamburger-close-icon');
+    hamCloseBtn.addEventListener('click', function () {
+      // hamBtn.style.display = "block";
+      hamMenu.style.display = "none";
+    })
+  </script>
+
   <!-- 이미지 무한스크롤 -->
   <script>
     const moreBtn = document.querySelector('.main-img-grid-more-button')
     moreBtn.addEventListener('click', (event) => {
-      fetchImages()
+      fetchImages() // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
     });
 
     const imageList = document.querySelector(".main-img-grid-container");
@@ -167,7 +204,7 @@
         }
         const datas = await response.json();
         console.log(datas);
-        makeImageList(datas);
+        makeImageList(datas); // HTML상에 img 태그를 새로 생성해 fetch한 이미지 데이터를 출력
 
       } catch (error) {
         console.error('데이터를 가져오는데 문제가 발생했습니다: ', error);
@@ -176,20 +213,18 @@
     function makeImageList(datas) {
       datas.forEach((item) => {
         imageList.innerHTML += "<img class='main-img-grid-item' src=" + item.download_url + " alt=''>";
-        // 그냥 할당연산자만 쓰면 li는 계속 1개만 보인다 (HTML에 할당되는 값이 계속 변경)
+
       })
     }
 
     const ifScrollDown = () => {
       window.addEventListener('scroll', () => {
-        // 스크롤이 상단으로부터 얼마나 됐는지 알아야한다(뷰포트의 높이 + 스크롤된 길이)
-        // 화면에 로딩된 페이지의 전체 높이
-        // 뷰포트의 높이 + 스크롤된 길이(documentElement에게 물어봐야 함) + 5~10px === 화면에 로딩된 페이지의 전체 높이
-
         if (window.innerHeight + document.documentElement.scrollTop + 10
           >= document.documentElement.offsetHeight) {
           fetchImages(pageToFetch += 1);
         };
+        // 스크롤이 화면 상단에서 얼마나 떨어졌는지 판단. 
+        // 최하단에 도달하면 fetchImage를 통해 url query를 변경시키며 새로운 이미지를 10개 로딩
       });
     }
 
@@ -209,8 +244,7 @@
     };
 
     window.addEventListener('scroll', throttling(ifScrollDown, 3000));
-
-
+    // 스로틀링을 통해 3초 간격으로 스크롤 간격 판단 함수를 실행시킨다.
   </script>
 
   <!-- 카카오맵 -->
