@@ -263,7 +263,7 @@ main {
 }
 
 .main-subscribe-email-input {
-  background-image: url("../img/mail.png");
+  background-image: url("../media/mail.png");
   background-position: 10px center;
   background-size: auto;
   background-repeat: no-repeat;
@@ -322,7 +322,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("../img/무제-1\ 1.png");
+  background-image: url("../media/무제-1\ 1.png");
   width: 600px;
   height: 400px;
   border-radius: 30px;
