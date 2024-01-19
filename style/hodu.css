@@ -367,10 +367,13 @@ footer {
   margin-top: -100px;
 }
 
-.scroll-top-button {
-  position: absolute;
+.scroll-button-wrap {
+  /* display: flex;
+  justify-content: space-between; */
+  position: fixed;
   bottom: 19px;
   right: 19px;
+  z-index: 11;
 }
 
 .footer-logo-icons-wrap {
