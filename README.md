@@ -5,7 +5,9 @@
 
 ## 📝프로젝트 소개
 '호두' 웹 페이지는 사랑스러운 고양이 '호두'가 주인공으로, PC 웹 규격 화면에 최적화되어 제작되었습니다.<br> 
-'호두'는 HTML/CSS, JavaScript를 기반으로 제작된 정적 웹 페이지입니다.
+'호두'는 HTML/CSS, JavaScript를 기반으로 제작된 정적 웹 페이지입니다.<br>
+
+`GitHub Pages 바로가기` : https://biiit4894.github.io/hodu-fe-project/
 <br>
 
 ## 📆 개발 기간
