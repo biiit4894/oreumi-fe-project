@@ -171,6 +171,12 @@ main {
   margin-bottom: auto;
 }
 
+.main-img-grid-container.loading-image {
+  width: 20%;
+  border-radius: 0px;
+  box-shadow: 0 0 0 transparent;
+}
+
 .main-img-grid-text-below {
   margin-top: 100px;
   display: flex;

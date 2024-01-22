@@ -13,34 +13,48 @@ moreBtn.addEventListener("click", () => {
 
 const imageList = document.querySelector(".main-img-grid-container");
 
+let isFetching = false;
 let pageToFetch = 1;
 
 async function fetchImages(pageNum) {
   try {
+    isFetching = true;
+    if (isFetching) {
+      imageList.innerHTML +=
+        "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 20%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
+    }
     const response = await fetch(
-      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=6"
+      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
     );
     if (!response.ok) {
       throw new Error("네트워크 응답에 문제가 있습니다.");
     }
+
     const datas = await response.json();
-    console.log(datas);
+    isFetching = false;
+
     makeImageList(datas); // HTML상에 img 태그를 새로 생성해 fetch한 이미지 데이터를 출력
   } catch (error) {
     console.error("데이터를 가져오는데 문제가 발생했습니다: ", error);
   }
 }
 function makeImageList(datas) {
-  datas.forEach((item) => {
-    imageList.innerHTML +=
-      "<img class='main-img-grid-item' id='new-fetched-image' src=" +
-      item.download_url +
-      " alt=''>";
-    const newImage = document.querySelector("#new-fetched-image");
-    console.log("newImage.clientHeight: ", newImage.clientHeight);
-    fetchedImagesHeight += newImage.clientHeight;
-    console.log("fetchedImagesHeight: ", fetchedImagesHeight);
-  });
+  if (!isFetching) {
+    document.querySelectorAll(".loading-image").forEach((e) => e.remove());
+    datas.forEach((item) => {
+      imageList.innerHTML +=
+        "<img class='new-fetched-image' id='new-fetched-image' src=" +
+        item.download_url +
+        " alt=''>";
+    });
+    // const newImage = document.getElementsByClassName("new-fetched-image");
+    // const img = newImage[0];
+    // console.log(newImage);
+    // console.log(img);
+    // console.log(img.clientHeight);
+    // fetchedImagesHeight += newImage[0].clientHeight;
+    // console.log("fetchedImagesHeight: ", fetchedImagesHeight);
+  }
 }
 
 const ifScrollDown = () => {
@@ -58,8 +72,11 @@ const ifScrollDown = () => {
   //   fetchImages((pageToFetch += 1));
   // }
 
-  if (fetchedImagesHeight >= window.innerHeight) {
+  if (pageToFetch >= 20) {
+    return;
+  } else if (imageList.clientHeight >= window.innerHeight) {
     fetchImages((pageToFetch += 1));
+    console.log("pageToFetch: " + pageToFetch);
   }
 };
 
@@ -78,5 +95,4 @@ const throttling = (callback, delay) => {
     }
   };
 };
-
-window.addEventListener("scroll", throttling(ifScrollDown, 2000));
+window.addEventListener("scroll", throttling(ifScrollDown, 1000));
