@@ -64,12 +64,14 @@ const ifScrollDown = (startY) => {
   for (let i = 0; i < newImages.length; i++) {
     newImages[i].id = "";
   }
+  console.log(startY);
+  console.log(window.scrollY);
 
   if (pageToFetch >= 10) {
     const btn = document.querySelector(".main-img-grid-text-below");
     btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
     return;
-  } else if (startY < window.scrollY) {
+  } else if (window.scrollY - startY > 50) {
     fetchImages((pageToFetch += 1));
   }
 };
