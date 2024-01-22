@@ -4,6 +4,16 @@ let fetchedImagesHeight = 0;
 
 moreBtn.addEventListener("click", () => {
   btnIsClicked = true;
+  const footer = document.querySelector(".footer-logo-icons-menu-wrap");
+  footer.id = "footer-logo-icons-menu-wrap";
+
+  const subscribe = document.querySelector(".main-subscribe-wrap");
+  const footerBackgroundImg = document.querySelector(".footer-img-wrap");
+  const kakaoMapWrap = document.querySelector(".main-kakao-map-wrap");
+
+  subscribe.style.display = "none";
+  footerBackgroundImg.style.display = "none";
+  kakaoMapWrap.style.display = "none";
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
 
@@ -29,7 +39,7 @@ async function fetchImages(pageNum) {
     isFetching = true;
     if (isFetching) {
       imageList.innerHTML +=
-        "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 10%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
+        "<img class='loading-image' src='./media/loading.gif' style='object-fit: none; border: none; box-shadow: none' alt='로딩중 이미지' style='width: 10%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
     }
     const response = await fetch(
       "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
@@ -64,12 +74,14 @@ const ifScrollDown = (startY) => {
   for (let i = 0; i < newImages.length; i++) {
     newImages[i].id = "";
   }
+  console.log(startY);
+  console.log(window.scrollY);
 
-  if (pageToFetch >= 10) {
+  if (pageToFetch >= 15) {
     const btn = document.querySelector(".main-img-grid-text-below");
     btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
     return;
-  } else if (startY < window.scrollY) {
+  } else if (window.scrollY > startY) {
     fetchImages((pageToFetch += 1));
   }
 };
