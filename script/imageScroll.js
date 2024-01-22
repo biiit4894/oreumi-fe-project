@@ -1,70 +1,81 @@
 const moreBtn = document.querySelector(".main-img-grid-more-button");
-
+let btnIsClicked = false;
 let fetchedImagesHeight = 0;
 
 moreBtn.addEventListener("click", () => {
   btnIsClicked = true;
-  console.log("btnIsClicked: ", btnIsClicked);
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
+
+  console.log(btnIsClicked);
+  if (btnIsClicked) {
+    let startYOffset = window.scrollY;
+    window.addEventListener(
+      "scroll",
+      throttling(ifScrollDown, 1000, startYOffset)
+    );
+  }
 });
 
 // 스로틀링을 통해 3초 간격으로 스크롤 간격 판단 함수를 실행시킨다.
 
 const imageList = document.querySelector(".main-img-grid-container");
 
+let isFetching = false;
 let pageToFetch = 1;
 
 async function fetchImages(pageNum) {
   try {
+    isFetching = true;
+    if (isFetching) {
+      imageList.innerHTML +=
+        "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 10%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
+    }
     const response = await fetch(
-      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=6"
+      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
     );
     if (!response.ok) {
       throw new Error("네트워크 응답에 문제가 있습니다.");
     }
+
     const datas = await response.json();
-    console.log(datas);
+    isFetching = false;
+
     makeImageList(datas); // HTML상에 img 태그를 새로 생성해 fetch한 이미지 데이터를 출력
   } catch (error) {
     console.error("데이터를 가져오는데 문제가 발생했습니다: ", error);
   }
 }
 function makeImageList(datas) {
-  datas.forEach((item) => {
-    imageList.innerHTML +=
-      "<img class='main-img-grid-item' id='new-fetched-image' src=" +
-      item.download_url +
-      " alt=''>";
-    const newImage = document.querySelector("#new-fetched-image");
-    console.log("newImage.clientHeight: ", newImage.clientHeight);
-    fetchedImagesHeight += newImage.clientHeight;
-    console.log("fetchedImagesHeight: ", fetchedImagesHeight);
-  });
+  if (!isFetching) {
+    datas.forEach((item) => {
+      imageList.innerHTML +=
+        "<img id='new-fetched-image' class='new-fetched-image' src=" +
+        item.download_url +
+        " alt=''>";
+    });
+    document.querySelectorAll(".loading-image").forEach((e) => e.remove());
+  }
 }
 
-const ifScrollDown = () => {
-  console.log("imageList: ", imageList.clientHeight);
-  console.log("fetchedImagesHeight2: ", fetchedImagesHeight);
-  console.log("window.innerHeight: ", window.innerHeight);
-  console.log(
-    "document.documentElement.offsetHeight",
-    document.documentElement.offsetHeight
-  );
-  // if (
-  //   window.innerHeight + document.documentElement.scrollTop + 10 >=
-  //   document.documentElement.offsetHeight
-  // ) {
-  //   fetchImages((pageToFetch += 1));
-  // }
+const ifScrollDown = (startY) => {
+  const newImages = document.getElementsByClassName("new-fetched-image");
 
-  if (fetchedImagesHeight >= window.innerHeight) {
+  for (let i = 0; i < newImages.length; i++) {
+    newImages[i].id = "";
+  }
+
+  if (pageToFetch >= 10) {
+    const btn = document.querySelector(".main-img-grid-text-below");
+    btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
+    return;
+  } else if (startY < window.scrollY) {
     fetchImages((pageToFetch += 1));
   }
 };
 
 // 스로틀링
-const throttling = (callback, delay) => {
+const throttling = (callback, delay, startY) => {
   console.log("throttle start");
   let timer = null;
   return () => {
@@ -72,11 +83,11 @@ const throttling = (callback, delay) => {
 
     if (timer === null) {
       timer = setTimeout(() => {
-        callback();
+        callback(startY);
+
         timer = null;
+        startY = window.scrollY;
       }, delay);
     }
   };
 };
-
-window.addEventListener("scroll", throttling(ifScrollDown, 2000));

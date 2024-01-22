@@ -171,6 +171,36 @@ main {
   margin-bottom: auto;
 }
 
+.main-img-grid-item {
+}
+
+.new-fetched-image {
+  width: 500px;
+}
+#new-fetched-image {
+  animation: fadein 5s ease 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .main-img-grid-text-below {
   margin-top: 100px;
   display: flex;
