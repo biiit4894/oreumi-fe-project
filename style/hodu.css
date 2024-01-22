@@ -171,10 +171,34 @@ main {
   margin-bottom: auto;
 }
 
-.main-img-grid-container.loading-image {
-  width: 20%;
-  border-radius: 0px;
-  box-shadow: 0 0 0 transparent;
+.main-img-grid-item {
+}
+
+.new-fetched-image {
+  width: 500px;
+}
+#new-fetched-image {
+  animation: fadein 5s ease 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .main-img-grid-text-below {

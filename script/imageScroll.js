@@ -9,8 +9,7 @@ moreBtn.addEventListener("click", () => {
 
   console.log(btnIsClicked);
   if (btnIsClicked) {
-    console.log("ㅁㄴㅇㄹㅁㄴㅇ");
-    let startYOffset = window.pageYOffset;
+    let startYOffset = window.scrollY;
     window.addEventListener(
       "scroll",
       throttling(ifScrollDown, 1000, startYOffset)
@@ -30,10 +29,10 @@ async function fetchImages(pageNum) {
     isFetching = true;
     if (isFetching) {
       imageList.innerHTML +=
-        "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 20%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
+        "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 10%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
     }
     const response = await fetch(
-      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=6"
+      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
     );
     if (!response.ok) {
       throw new Error("네트워크 응답에 문제가 있습니다.");
@@ -49,32 +48,29 @@ async function fetchImages(pageNum) {
 }
 function makeImageList(datas) {
   if (!isFetching) {
-    document.querySelectorAll(".loading-image").forEach((e) => e.remove());
     datas.forEach((item) => {
       imageList.innerHTML +=
-        "<img class='new-fetched-image' id='new-fetched-image' src=" +
+        "<img id='new-fetched-image' class='new-fetched-image' src=" +
         item.download_url +
         " alt=''>";
     });
-    const newImage = document.querySelector("#new-fetched-image");
+    document.querySelectorAll(".loading-image").forEach((e) => e.remove());
   }
 }
 
 const ifScrollDown = (startY) => {
-  // if (
-  //   window.innerHeight + document.documentElement.scrollTop + 10 >=
-  //   document.documentElement.offsetHeight
-  // ) {
-  //   fetchImages((pageToFetch += 1));
-  // }
-  console.log(startY);
-  console.log(window.pageYOffset);
+  const newImages = document.getElementsByClassName("new-fetched-image");
 
-  if (pageToFetch >= 20) {
+  for (let i = 0; i < newImages.length; i++) {
+    newImages[i].id = "";
+  }
+
+  if (pageToFetch >= 10) {
+    const btn = document.querySelector(".main-img-grid-text-below");
+    btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
     return;
-  } else if (startY < window.pageYOffset) {
+  } else if (startY < window.scrollY) {
     fetchImages((pageToFetch += 1));
-  } else {
   }
 };
 
@@ -90,7 +86,7 @@ const throttling = (callback, delay, startY) => {
         callback(startY);
 
         timer = null;
-        startY = window.pageYOffset;
+        startY = window.scrollY;
       }, delay);
     }
   };
