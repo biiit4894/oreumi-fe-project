@@ -1,12 +1,21 @@
 const moreBtn = document.querySelector(".main-img-grid-more-button");
-
+let btnIsClicked = false;
 let fetchedImagesHeight = 0;
 
 moreBtn.addEventListener("click", () => {
   btnIsClicked = true;
-  console.log("btnIsClicked: ", btnIsClicked);
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
+
+  console.log(btnIsClicked);
+  if (btnIsClicked) {
+    console.log("ㅁㄴㅇㄹㅁㄴㅇ");
+    let startYOffset = window.pageYOffset;
+    window.addEventListener(
+      "scroll",
+      throttling(ifScrollDown, 1000, startYOffset)
+    );
+  }
 });
 
 // 스로틀링을 통해 3초 간격으로 스크롤 간격 판단 함수를 실행시킨다.
@@ -24,7 +33,7 @@ async function fetchImages(pageNum) {
         "<img class='loading-image' src='./media/loading.gif' alt='로딩중 이미지' style='width: 20%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
     }
     const response = await fetch(
-      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
+      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=6"
     );
     if (!response.ok) {
       throw new Error("네트워크 응답에 문제가 있습니다.");
@@ -47,41 +56,30 @@ function makeImageList(datas) {
         item.download_url +
         " alt=''>";
     });
-    // const newImage = document.getElementsByClassName("new-fetched-image");
-    // const img = newImage[0];
-    // console.log(newImage);
-    // console.log(img);
-    // console.log(img.clientHeight);
-    // fetchedImagesHeight += newImage[0].clientHeight;
-    // console.log("fetchedImagesHeight: ", fetchedImagesHeight);
+    const newImage = document.querySelector("#new-fetched-image");
   }
 }
 
-const ifScrollDown = () => {
-  console.log("imageList: ", imageList.clientHeight);
-  console.log("fetchedImagesHeight2: ", fetchedImagesHeight);
-  console.log("window.innerHeight: ", window.innerHeight);
-  console.log(
-    "document.documentElement.offsetHeight",
-    document.documentElement.offsetHeight
-  );
+const ifScrollDown = (startY) => {
   // if (
   //   window.innerHeight + document.documentElement.scrollTop + 10 >=
   //   document.documentElement.offsetHeight
   // ) {
   //   fetchImages((pageToFetch += 1));
   // }
+  console.log(startY);
+  console.log(window.pageYOffset);
 
   if (pageToFetch >= 20) {
     return;
-  } else if (imageList.clientHeight >= window.innerHeight) {
+  } else if (startY < window.pageYOffset) {
     fetchImages((pageToFetch += 1));
-    console.log("pageToFetch: " + pageToFetch);
+  } else {
   }
 };
 
 // 스로틀링
-const throttling = (callback, delay) => {
+const throttling = (callback, delay, startY) => {
   console.log("throttle start");
   let timer = null;
   return () => {
@@ -89,10 +87,11 @@ const throttling = (callback, delay) => {
 
     if (timer === null) {
       timer = setTimeout(() => {
-        callback();
+        callback(startY);
+
         timer = null;
+        startY = window.pageYOffset;
       }, delay);
     }
   };
 };
-window.addEventListener("scroll", throttling(ifScrollDown, 1000));
