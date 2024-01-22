@@ -4,6 +4,16 @@ let fetchedImagesHeight = 0;
 
 moreBtn.addEventListener("click", () => {
   btnIsClicked = true;
+  const footer = document.querySelector(".footer-logo-icons-menu-wrap");
+  footer.id = "footer-logo-icons-menu-wrap";
+
+  const subscribe = document.querySelector(".main-subscribe-wrap");
+  const footerBackgroundImg = document.querySelector(".footer-img-wrap");
+  const kakaoMapWrap = document.querySelector(".main-kakao-map-wrap");
+
+  subscribe.style.display = "none";
+  footerBackgroundImg.style.display = "none";
+  kakaoMapWrap.style.display = "none";
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
 
@@ -71,7 +81,7 @@ const ifScrollDown = (startY) => {
     const btn = document.querySelector(".main-img-grid-text-below");
     btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
     return;
-  } else if (window.scrollY - startY > 50) {
+  } else if (window.scrollY > startY) {
     fetchImages((pageToFetch += 1));
   }
 };
