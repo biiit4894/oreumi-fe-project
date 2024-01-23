@@ -61,8 +61,8 @@ ESTsoft 오르미 백엔드 개발자 과정 4기의 프론트엔드 미니 프�
     <img src="https://github.com/biiit4894/hodu-fe-project/assets/82032418/6a9d0a89-6e5e-4cb6-a331-71943f2b3c0e">
   </p>
   <p align="center">
-    <img src="https://github.com/biiit4894/hodu-fe-project/assets/82032418/557000d8-eb1c-427d-815d-32aaaecc17a4">
     <img src="https://github.com/biiit4894/hodu-fe-project/assets/82032418/b3089202-4024-4272-99a3-4ae1c2708309">
+    <img src="https://github.com/biiit4894/hodu-fe-project/assets/82032418/557000d8-eb1c-427d-815d-32aaaecc17a4">
   </p>
 
 <br>
