@@ -31,12 +31,6 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
 
   // 마커 위치를 클릭한 위치로 옮깁니다
   marker.setPosition(latlng);
-
-  let message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-  message += "경도는 " + latlng.getLng() + " 입니다";
-
-  let resultDiv = document.getElementById("clickLatlng");
-  resultDiv.innerHTML = message;
 });
 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
