@@ -17,7 +17,6 @@ moreBtn.addEventListener("click", () => {
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
 
-  console.log(btnIsClicked);
   if (btnIsClicked) {
     let startYOffset = window.scrollY;
     window.addEventListener(
@@ -86,7 +85,6 @@ const ifScrollDown = (startY) => {
     <img class="refresh-icon" src="./media/refresh.png">`;
     const refreshBtn = document.querySelector(".refresh-icon");
     refreshBtn.addEventListener("click", () => {
-      console.log("Wtf");
       location.href = location.href;
     });
 
