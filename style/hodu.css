@@ -262,6 +262,10 @@ main {
   margin-top: 20px;
 }
 
+#main-kakao-map-texts-plain-sub {
+  color: #83878d;
+}
+
 #map {
   margin-top: 40px;
   width: 100%;
