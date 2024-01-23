@@ -41,7 +41,7 @@ async function fetchImages(pageNum) {
         "<img class='loading-image' src='./media/loading.gif' style='object-fit: none; border: none; box-shadow: none' alt='로딩중 이미지' style='width: 10%; border-radius: 0px; box-shadow: 0 0 0 transparent;'>";
     }
     const response = await fetch(
-      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=3"
+      "https://picsum.photos/v2/list?page=" + pageNum + "&limit=6"
     );
     if (!response.ok) {
       throw new Error("네트워크 응답에 문제가 있습니다.");
@@ -76,7 +76,7 @@ const ifScrollDown = (startY) => {
   console.log(startY);
   console.log(window.scrollY);
 
-  if (pageToFetch >= 15) {
+  if (pageToFetch >= 10) {
     const btn = document.querySelector(".main-img-grid-text-below");
     btn.innerHTML = `
     <p class="main-img-grid-text-below-bold" id="img-grid-text-below-after">
@@ -85,7 +85,11 @@ const ifScrollDown = (startY) => {
     <img class="refresh-icon" src="./media/refresh.png">`;
     const refreshBtn = document.querySelector(".refresh-icon");
     refreshBtn.addEventListener("click", () => {
-      location.href = location.href;
+      location.reload();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+      });
     });
 
     return;
