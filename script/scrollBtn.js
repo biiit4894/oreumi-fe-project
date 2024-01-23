@@ -18,7 +18,6 @@ scrollTopBtn.addEventListener("mouseout", () => {
 });
 
 scrollDownBtn.addEventListener("click", () => {
-  console.log("click");
   window.scrollTo({
     top: document.body.scrollHeight,
     left: 0,

@@ -17,7 +17,6 @@ moreBtn.addEventListener("click", () => {
 
   fetchImages(); // 버튼을 클릭하면 picsum url을 통해 이미지 데이터를 fetch
 
-  console.log(btnIsClicked);
   if (btnIsClicked) {
     let startYOffset = window.scrollY;
     window.addEventListener(
@@ -79,7 +78,16 @@ const ifScrollDown = (startY) => {
 
   if (pageToFetch >= 15) {
     const btn = document.querySelector(".main-img-grid-text-below");
-    btn.innerHTML = `<p class="main-img-grid-text-below-bold">더 이상 조회할 이미지가 없습니다.</p>`;
+    btn.innerHTML = `
+    <p class="main-img-grid-text-below-bold" id="img-grid-text-below-after">
+    더 이상 조회할 이미지가 없습니다.
+    </p>
+    <img class="refresh-icon" src="./media/refresh.png">`;
+    const refreshBtn = document.querySelector(".refresh-icon");
+    refreshBtn.addEventListener("click", () => {
+      location.href = location.href;
+    });
+
     return;
   } else if (window.scrollY > startY) {
     fetchImages((pageToFetch += 1));
