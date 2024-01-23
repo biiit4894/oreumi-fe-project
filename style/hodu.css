@@ -214,6 +214,14 @@ main {
   font-size: 24px;
   font-weight: 700;
   line-height: 30px;
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+}
+
+.refresh-icon {
+  height: 5vh;
+  margin-bottom: 10vh;
+  cursor: pointer;
 }
 
 .main-img-grid-more-button {
@@ -225,7 +233,7 @@ main {
   font-weight: 700;
   width: 140px;
   padding: 15px 31px;
-  margin-top: 28px;
+  cursor: pointer;
 }
 
 .main-img-grid-hr {
@@ -429,18 +437,19 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 130px;
+  height: 10vh;
   width: 60vw;
   margin: 0 auto;
 }
 
 .footer-logo {
   margin-right: auto;
-  height: 50px;
+  height: 4vh;
 }
 
 .footer-icons-wrap {
   margin-left: auto;
+  height: 3vh;
 }
 
 .footer-icons-wrap a {
